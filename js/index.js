@@ -8,14 +8,35 @@ console.log('JS is working!!')
 //then add methods to render the q's
 //if user input answers match the key's value then turn to green
 //this will be the plan for now just to keep quiz app simpe
+//add event listener on click will check the answers
 
-
-
-function createQuiz() {
-  this.questions = []
+function Quiz(quizAsObj) {
+  this.questions = Object.keys(quizAsObj)
+  this.answers = Object.values(quizAsObj)
 }
 
+Quiz.prototype.renderQs = function() {
+  var qs = this.questions
+  for (var i = 0; i < qs.length; i++) {
+    //get ul 
+    //create li 
+    //create 
+    //add q's as text content and render questions
+    //create input in li
+    //
+  }
+}
 
-quiz1 = {
+Quiz.prototype.checkAns = function() {
 
 }
+
+var simpleMath = new Quiz(
+  {
+    "23+84?": 2,
+    "5-2?": 3,
+    "5*7?": 35,
+    "10/2?": 5
+  }
+)
+
