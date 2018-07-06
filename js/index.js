@@ -28,7 +28,10 @@ Quiz.prototype.renderQs = function() {
 }
 
 Quiz.prototype.checkAns = function() {
-
+  //gets all the user inputs
+  //check to see if they match with answers
+  //if it does then change something to gree
+  //if it doesn't then change it to red
 }
 
 var simpleMath = new Quiz(
@@ -40,3 +43,8 @@ var simpleMath = new Quiz(
   }
 )
 
+
+simpleMath.renderQs()
+
+
+document.getElementById('submit', simpleMath.checkAns())
