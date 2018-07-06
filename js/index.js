@@ -10,11 +10,13 @@ console.log('JS is working!!')
 //this will be the plan for now just to keep quiz app simpe
 //add event listener on click will check the answers
 
+//constructor function
 function Quiz(quizAsObj) {
   this.questions = Object.keys(quizAsObj)
   this.answers = Object.values(quizAsObj)
 }
 
+//render questions method
 Quiz.prototype.renderQs = function() {
   //questions created through constructor function
   var qs = this.questions
@@ -35,6 +37,7 @@ Quiz.prototype.renderQs = function() {
   }
 }
 
+//method to check answers and return green for correct red for incorrect
 Quiz.prototype.checkAns = function() {
   //gets all the user inputs
   var guesses = document.getElementsByTagName('input')
@@ -50,6 +53,18 @@ Quiz.prototype.checkAns = function() {
   }
 }
 
+//turnign an event listern to become a method
+Quiz.prototype.submitGuesses = function() {
+
+  var quiz = this
+  return document.getElementById('form').addEventListener('submit',
+    function(event){
+      event.preventDefault()
+      quiz.checkAns()
+    }
+  )
+}
+
 var simpleMath = new Quiz(
   {
     "23+84?": 2,
@@ -59,11 +74,17 @@ var simpleMath = new Quiz(
   }
 )
 
-simpleMath.renderQs()
-
-document.getElementById('form').addEventListener('submit',
-  function(event){
-    event.preventDefault()
-    simpleMath.checkAns()
+var testQ = new Quiz(
+  {
+    "what color is the sky": "blue",
+    "how old are you?": 42,
+    "what is your social security number": 1234567,
+    "how much do you weight in pounds": 300
   }
 )
+
+simpleMath.renderQs()
+simpleMath.submitGuesses()
+testQ.renderQs()
+testQ.submitGuesses()
+
