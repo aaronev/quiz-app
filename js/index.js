@@ -67,8 +67,3 @@ document.getElementById('form').addEventListener('submit',
     simpleMath.checkAns()
   }
 )
-
-
-
-
-
