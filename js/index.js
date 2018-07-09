@@ -11,6 +11,8 @@ console.log('JS is working!!')
 //add event listener on click will check the answers
 
 //constructor function
+//it will take an object as keys being the q's and values as answers
+//put answers in as lowercase if answers are strings
 function Quiz(quizAsObj) {
   this.questions = Object.keys(quizAsObj)
   this.answers = Object.values(quizAsObj)
@@ -26,12 +28,16 @@ Quiz.prototype.renderQs = function() {
   for (var i = 0; i < qs.length; i++) {
     //create li 
     var li = document.createElement('li')
+    //create div for spacing
+    var div = document.createElement('div')
     //create input
     var input = document.createElement('input')
     //add q's as text content and render questions
     li.textContent = qs[i]
+    //append input to div
+    div.appendChild(input)
     //create input in li
-    li.appendChild(input)
+    li.appendChild(div)
     //append create elements to ul
     listQs.appendChild(li)
   }
@@ -43,7 +49,11 @@ Quiz.prototype.checkAns = function() {
   var guesses = document.getElementsByTagName('input')
   //check to see if they match with answers
   for (i = 0; i < this.answers.length; i++) {
-  //if it does then change background color to green
+  //if answers are strings then put to lowercase and trim answers
+    if(typeof guesses[i] == "string") {
+      guesses[i].trim().toLowerCase()
+    }
+  //if answers match then change background color to green
     if(guesses[i].value == this.answers[i]) {
       guesses[i].style.backgroundColor = "green"
     } else {
@@ -55,7 +65,6 @@ Quiz.prototype.checkAns = function() {
 
 //turnign an event listern to become a method
 Quiz.prototype.submitGuesses = function() {
-
   var quiz = this
   return document.getElementById('form').addEventListener('submit',
     function(event){
@@ -65,26 +74,18 @@ Quiz.prototype.submitGuesses = function() {
   )
 }
 
-var simpleMath = new Quiz(
+Quiz.prototype.setUp = function() {
+  return (
+    this.renderQs(),
+    this.submitGuesses()
+  )
+}
+
+new Quiz(
   {
     "23+84?": 2,
     "5-2?": 3,
     "5*7?": 35,
     "10/2?": 5
   }
-)
-
-var testQ = new Quiz(
-  {
-    "what color is the sky": "blue",
-    "how old are you?": 42,
-    "what is your social security number": 1234567,
-    "how much do you weight in pounds": 300
-  }
-)
-
-simpleMath.renderQs()
-simpleMath.submitGuesses()
-testQ.renderQs()
-testQ.submitGuesses()
-
+).setUp()
