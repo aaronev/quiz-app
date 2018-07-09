@@ -95,7 +95,7 @@ new Quiz(
     "What is a name you call myself (Sound of Music)?": "ME",
     "(5*8)/2(6/3)+1?": 41,
     "First President of the United States?": "george washington",
-    "What is inside of a volcano": "lava",
+    "What is inside of a volcano?": "lava",
     "What a day keeps the doctor a way?": "apple"
   }
 ).setUp()
