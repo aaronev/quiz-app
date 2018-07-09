@@ -82,7 +82,8 @@ Quiz.prototype.submitGuesses = function() {
 Quiz.prototype.setUp = function() {
   return (
     this.renderQs(),
-    this.submitGuesses()
+    this.submitGuesses(),
+    this.fail()
   )
 }
 
@@ -90,7 +91,11 @@ new Quiz(
   {
     "6/2(1+2)?": 9,
     "Fifth President of the United States?": "James Monroe",
-    "5*7?": 35,
-    "What color is the sky?": "blue"
+    "What color is the sky?": "blue",
+    "What is a name you call myself (Sound of Music)?": "ME",
+    "(5*8)/2(6/3)+1?": 41,
+    "First President of the United States?": "george washington",
+    "What is inside of a volcano": "lava",
+    "What a day keeps the doctor a way?": "apple"
   }
 ).setUp()
