@@ -15,7 +15,11 @@ console.log('JS is working!!')
 //put answers in as lowercase if answers are strings
 function Quiz(quizAsObj) {
   this.questions = Object.keys(quizAsObj)
-  this.answers = Object.values(quizAsObj)
+  this.answers = Object.values(quizAsObj).map(el => {
+    if (typeof el == "string") {
+      return el.toLowerCase().trim()
+    } else return el
+  })
 }
 
 //render questions method
@@ -50,8 +54,8 @@ Quiz.prototype.checkAns = function() {
   //check to see if they match with answers
   for (i = 0; i < this.answers.length; i++) {
   //if answers are strings then put to lowercase and trim answers
-    if(typeof guesses[i] == "string") {
-      guesses[i].trim().toLowerCase()
+    if(typeof guesses[i].value == "string") {
+      guesses[i].value = guesses[i].value.trim().toLowerCase()
     }
   //if answers match then change background color to green
     if(guesses[i].value == this.answers[i]) {
@@ -74,6 +78,7 @@ Quiz.prototype.submitGuesses = function() {
   )
 }
 
+//created a setup function to invoke functions for me
 Quiz.prototype.setUp = function() {
   return (
     this.renderQs(),
@@ -83,9 +88,9 @@ Quiz.prototype.setUp = function() {
 
 new Quiz(
   {
-    "23+84?": 107,
-    "5-2?": 3,
+    "6/2(1+2)?": 9,
+    "Fifth President of the United States?": "James Monroe",
     "5*7?": 35,
-    "10/2?": 5
+    "What color is the sky?": "blue"
   }
 ).setUp()
